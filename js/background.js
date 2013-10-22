@@ -6,53 +6,51 @@
  * To change this template use File | Settings | File Templates.
  */
 
-
-/*  获取用户配置参数	*/
-var localstorage = window.localStorage;
-
 /**
  * records是当前仍在纪录的record的集合；
  * record对象包含属性：tabId,url,title,startTime,finishTime,browserVer,lang,formerRecord,fore
  */
 var records = new Array();
-var activeStartTime = null;
-var activeFinishTime = null;
+var activeStartTime = 0;
+var activeFinishTime = 0;
 /**
  *  trackID是当前record的id
  *  write_records是用来存储record的数组
  */
 var trackID = 0;
 var write_records = [];
-
 /**
  *  捕获浏览器类型及版本
  */
-
 var browserVer = getBrowserVer();
 /**
  * Tab更新时间监听；
  */
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     //当Tab更新时，我们首先查看此Tab之前的URL纪录，如果存在，则结束此条URL纪录并将纪录信息写入数据库，同时从records中删除此纪录
-    if (changeInfo.status=="loading")
+    if (localStorage.getItem("initial") == 0) {
+        //do nothing;
+    } else
     {
-        //只有当更新的tab页是当前页是才需要刷新activeTime；
-        var formerRecordIdx = getRecordIdxByTabId(tabId);
-        if (tab.active == true) {
-            activeFinishTime = new Date();
-            if (formerRecordIdx != -1) {
-                var formerRecord = records[formerRecordIdx];
-                formerRecord.activeTime += getTimeInterval(activeStartTime, activeFinishTime);
-                alert("前台开始时间：" + activeStartTime + "\n前台结束时间：" + activeFinishTime + "\n时间间隔：" + "前台时间累计：" + formerRecord.activeTime);
-                writeToDB(formerRecord);
-                records.splice(formerRecordIdx, 1);
+        if (changeInfo.status == "loading") {
+            //只有当更新的tab页是当前页是才需要刷新activeTime；
+            var formerRecordIdx = getRecordIdxByTabId(tabId);
+            if (tab.active == true) {
+                activeFinishTime = new Date();
+                if (formerRecordIdx != -1) {
+                    var formerRecord = records[formerRecordIdx];
+                    formerRecord.activeTime += getTimeInterval(activeStartTime, activeFinishTime);
+                    alert("前台开始时间：" + activeStartTime + "\n前台结束时间：" + activeFinishTime + "\n时间间隔：" + "前台时间累计：" + formerRecord.activeTime);
+                    writeToDB(formerRecord);
+                    records.splice(formerRecordIdx, 1);
+                }
+                activeStartTime = activeFinishTime;
             }
-            activeStartTime = activeFinishTime;
+            if (isInSysFilterList(tab.url) == false && isInUserFilterList(tab.url) == false) {
+                //网页纪录开始；
+                trackData(tab);
+            }
         }
-    }
-    //网页加载完毕，纪录开始；
-    if (changeInfo.status == "complete" && isInSysFilterList(tab.url) == false && isInUserFilterList(tab.url) == false) {
-        trackData(tab);
     }
 });
 
@@ -68,19 +66,19 @@ chrome.tabs.onRemoved.addListener(function (tabId, removeInfo) {
 });
 
 /**
- *  activeTab改变事件监听
+ *  activatedTab改变事件监听
  */
 chrome.tabs.onActivated.addListener(function (activeInfo) {
     activeFinishTime = new Date();
     var formerRecordIdx = getActiveRecordIdx();
     var currentRecordIdx = getRecordIdxByTabId(activeInfo.tabId);
-    if(formerRecordIdx !=  -1){            //前activeRecord对象存在
+    if (formerRecordIdx != -1) {            //前activeRecord对象存在
         var formerRecord = records[formerRecordIdx];
         formerRecord.activeTime += getTimeInterval(activeStartTime, activeFinishTime);
         alert("前台开始时间：" + activeStartTime + "\n前台结束时间：" + activeFinishTime + "前台时间累计：" + formerRecord.activeTime);
         formerRecord.active = false;
     }
-    if(currentRecordIdx != -1){
+    if (currentRecordIdx != -1) {
         var currentRecord = records[currentRecordIdx];
         currentRecord.active = true;
     }
@@ -127,7 +125,7 @@ function isInSysFilterList(url) {
 
 /*   是否在用户过滤列表，如果在，返回true，否则返回false    */
 function isInUserFilterList(url) {
-    var urls = JSON.parse(localstorage.getItem("userFilterList"));
+    var urls = JSON.parse(localStorage.getItem("userFilterList"));
     for(var i=0;i<urls.length;i++){
         if(url.indexOf(urls[i].url)>=0){
             return true;
@@ -180,7 +178,6 @@ function isInBookmarks(url){
     /*           */
 }
 
-
 function writeToDB(record){
     record.finishTime = new Date();
     var write_record;
@@ -188,6 +185,6 @@ function writeToDB(record){
         "browserVer": browserVer, "startTime": record.startTime, "finishTime": record.finishTime,
         "lang": record.lang, "isInBookmarks": record.isInBookmarks,  "activeTime": record.activeTime, "formerURL": 0};
     write_records.push(write_record);
-    localstorage.setItem("records", JSON.stringify(write_records));
+    localStorage.setItem("records", JSON.stringify(write_records));
     trackID = trackID + 1;
 }

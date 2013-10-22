@@ -1,16 +1,35 @@
 <!doctype html>
 <html>
-  <head>
-    <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
+<head>
+    <meta charset="UTF-8">
     <title>Getting Started Extension's Popup</title>
-    <link rel="stylesheet" type="text/css" href="css/popup_style.css"/>
-  </head>
-  <body>
-    <ul>
-      <li><a href="options.html" target="_blank">选项</a></li>
-      <li><a href="statistics.html" target="_blank">我的数据</a></li>
-      <li><a href="help.html" target="_blank">帮助</a></li>
-      <li><a href="about.html" target="_blank">关于</a></li>
-    </ul>
-  </body>
+    <link rel="stylesheet" href="css/popup_style.css">
+    <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/popup.js"></script>
+</head>
+<body>
+<div id="login">
+    <div>
+        <div id="banner">
+            This is a banner!<span id="signUp">创建一个帐号</span>
+        </div>
+        <form>
+            用户名：<input type="text" name="username"><br>
+            密&nbsp;码：<input type="password" name="password"><br>
+            <input type="submit" value="登陆">
+        </form>
+    </div>
+    <hr>
+    <div id="offlineTrial">
+        <p>我没有帐号，我也不想注册帐号!</p>
+        <p>尝试无期限离线试用：<a href="options.html" target="_blank">点击这里</a></p>
+    </div>
+</div>
+<ul>
+    <li><a href="options.html" target="_blank">选项</a></li>
+    <li><a href="statistics.html" target="_blank">我的数据</a></li>
+    <li><a href="help.html" target="_blank">帮助</a></li>
+    <li><a href="about.html" target="_blank">关于</a></li>
+</ul>
+</body>
 </html>
