@@ -1,3 +1,6 @@
+Version 0.43---何伟
+将installed.html页面做了修改，增加了登陆框，并修改了一些样式。
+
 Version 0.42---赵小天
 将所有html页面按html5标准微调；
 新增initial.js,popup.js,installed.html,installed_style.css文件；
