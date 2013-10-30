@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Getting Started Extension's Popup</title>
     <link rel="stylesheet" href="css/popup_style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/popup.js"></script>
 </head>
@@ -11,25 +12,30 @@
 <div id="login">
     <div>
         <div id="banner">
-            This is a banner!<span id="signUp">创建一个帐号</span>
+            This is a banner!<span id="signUp"><a href="#" class="btn-primary btn-sm">创建一个帐号</a></span>
         </div>
-        <form>
-            用户名：<input type="text" name="username"><br>
-            密&nbsp;码：<input type="password" name="password"><br>
-            <input type="submit" value="登陆">
+        <br>
+        <form role="form">
+            <div class="form-group">
+                <input type="text" name="username" class="form-control input-sm" placeholder="Username">
+                <input type="password" name="password" class="form-control input-sm" placeholder="Password">
+                <input type="submit" value="Sing In" class="btn-primary btn-block">
+            </div>
         </form>
     </div>
-    <hr>
+    <br>
     <div id="offlineTrial">
-        <p>我没有帐号，我也不想注册帐号!</p>
-        <p>尝试无期限离线试用：<a href="options.html" target="_blank">点击这里</a></p>
+        <p class="text-info">I don't have an account and I don't want to create an account. </p>
+        <p>Try to use it offline：<a href="options.html" target="_blank" class="btn-default">Click here!</a></p>
     </div>
 </div>
+<!--
 <ul>
-    <li><a href="options.html" target="_blank">选项</a></li>
-    <li><a href="statistics.html" target="_blank">我的数据</a></li>
-    <li><a href="help.html" target="_blank">帮助</a></li>
-    <li><a href="about.html" target="_blank">关于</a></li>
+    <li><a href="options.html" target="_blank">options</a></li>
+    <li><a href="statistics.html" target="_blank">my data</a></li>
+    <li><a href="help.html" target="_blank">help</a></li>
+    <li><a href="about.html" target="_blank">about</a></li>
 </ul>
+-->
 </body>
 </html>

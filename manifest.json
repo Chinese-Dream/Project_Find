@@ -5,14 +5,13 @@
     "version": "0.41",
 
     "browser_action": {
-        "default_icon": "images/icon.png",
-        "default_popup": "popup.html"
+        "default_icon": "images/icon.png"
     },
     "options_page": "options.html",
     "permissions": [
-        "storage", "bookmarks", "tabs", "webRequest", "http://*/*"
+        "storage", "bookmarks", "tabs", "webRequest", "http://*/*", "https://*/*"
     ],
     "background": {
-        "scripts": ["js/initial.js", "js/background.js"]
+        "scripts": ["js/jquery-1.10.2.min.js", "js/initial.js", "js/background.js"]
     }
 }

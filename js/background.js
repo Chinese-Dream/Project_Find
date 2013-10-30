@@ -40,7 +40,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
                 if (formerRecordIdx != -1) {
                     var formerRecord = records[formerRecordIdx];
                     formerRecord.activeTime += getTimeInterval(activeStartTime, activeFinishTime);
-                    alert("前台开始时间：" + activeStartTime + "\n前台结束时间：" + activeFinishTime + "\n时间间隔：" + "前台时间累计：" + formerRecord.activeTime);
+                    //alert("前台开始时间：" + activeStartTime + "\n前台结束时间：" + activeFinishTime + "\n时间间隔：" + "前台时间累计：" + formerRecord.activeTime);
                     writeToDB(formerRecord);
                     records.splice(formerRecordIdx, 1);
                 }
@@ -75,7 +75,7 @@ chrome.tabs.onActivated.addListener(function (activeInfo) {
     if (formerRecordIdx != -1) {            //前activeRecord对象存在
         var formerRecord = records[formerRecordIdx];
         formerRecord.activeTime += getTimeInterval(activeStartTime, activeFinishTime);
-        alert("前台开始时间：" + activeStartTime + "\n前台结束时间：" + activeFinishTime + "前台时间累计：" + formerRecord.activeTime);
+        //alert("前台开始时间：" + activeStartTime + "\n前台结束时间：" + activeFinishTime + "前台时间累计：" + formerRecord.activeTime);
         formerRecord.active = false;
     }
     if (currentRecordIdx != -1) {

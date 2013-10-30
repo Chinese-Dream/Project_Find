@@ -5,10 +5,10 @@
  * Time: 下午2:25
  * To change this template use File | Settings | File Templates.
  */
-$(function(){
+/*$(function(){
     if(window.localStorage.getItem("initial")==0){
-        $("ul").css("display","none")
+        $("ul").css("display","none");
     }else{
         $("#login").css("display","none");
     }
-});
+});*/

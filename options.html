@@ -9,15 +9,25 @@
     <script src="js/analysis.js"></script>
 </head>
 <body>
-<div id="main">
+<div id="options">
+    <div id="username">用户名：
+        <span class="initial_0"><a class="login">登录</a>或者<a class="trial">离线试用</a></span>
+        <span id="loginUser"></span>
+        <span id="trialUser"></span>
+    </div>
     <div id="setting">
-        <p id="to">用户名：<input type="text" id="username" name="username"></p>
+        <p id="isRecord">自动记录:
+            <span class="initial_0">未开启，请先登录</span>
+            <span id="start">未开启<button>点击开启</button></span>
+            <span id="stop">已开启<button>点击暂停</button></span>
+        </p>
     </div>
     <div id="filter">
         <p>用户过滤列表：</p>
         <ul id="userFilterList"></ul>
-        <button id="addUrl">添加过滤URL</button>&nbsp;&nbsp;<button id="saveUserFilterList">保存过滤列表</button>
+        <button id="addUrl">添加过滤URL</button>
+        &nbsp;&nbsp;
+        <button id="saveUserFilterList">保存过滤列表</button>
     </div>
-</div>
 </body>
 </html>

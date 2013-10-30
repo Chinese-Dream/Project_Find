@@ -1,17 +1,34 @@
-ul.url{
-   list-style-type: disc;
+div {
+    text-align: center;
+    margin: 0 auto;
 }
-p{
+
+p {
     font-family: Western;
     font-size: 15px;
     font-weight: bolder;
 }
-.delete{
-    font-size:small;
-    color:blue;
-    text-decoration:underline;
+
+a {
+    text-decoration: underline;
+    color: blue;
 }
-.delete:hover{
-    cursor:pointer;
+
+a:hover {
+    cursor: pointer;
+}
+
+ul.url {
+    list-style-type: disc;
+}
+
+.delete {
+    font-size: small;
+    color: blue;
+    text-decoration: underline;
+}
+
+.delete:hover {
+    cursor: pointer;
 }
 
