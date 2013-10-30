@@ -1,3 +1,6 @@
+Version 0.44---何伟
+将help.html,about.html,popup.html页面做了修改，用boostrap修改了他们的样式。
+
 Version 0.43---何伟
 将installed.html页面做了修改，增加了登陆框，并修改了一些样式。
 
