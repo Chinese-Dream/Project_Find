@@ -1,9 +1,12 @@
+<<<<<<< HEAD
 Version 0.45---赵小天
 localStorage新增isRecord，bakground.js代码暂未跟随调整；
 针对initial分为3种情况，优化相应代码；
 对browserAction的点击事件进行初步响应；
 新增content_script.js,toolbar_style.css。
 
+=======
+>>>>>>> ed188ffad8fc719f23eb49c7bc81e387721c8259
 Version 0.44---何伟
 将help.html,about.html,popup.html页面做了修改，用boostrap修改了他们的样式。
 
