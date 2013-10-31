@@ -2,7 +2,7 @@
     "manifest_version": 2,
     "name": "Find Project",
     "description": "This extension will track and record your website list",
-    "version": "0.41",
+    "version": "0.46",
 
     "browser_action": {
         "default_icon": "images/icon.png"
@@ -13,5 +13,12 @@
     ],
     "background": {
         "scripts": ["js/jquery-1.10.2.min.js", "js/initial.js", "js/background.js"]
-    }
+    },
+    "content_scripts": [
+        {
+            "matches": ["http://*/*", "https://*/*"],
+            "css": ["css/toolbar_style.css"],
+            "js": ["js/jquery-1.10.2.min.js", "js/content_script.js"]
+        }
+    ]
 }

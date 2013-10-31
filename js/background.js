@@ -28,7 +28,7 @@ var browserVer = getBrowserVer();
  */
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
     //当Tab更新时，我们首先查看此Tab之前的URL纪录，如果存在，则结束此条URL纪录并将纪录信息写入数据库，同时从records中删除此纪录
-    if (localStorage.getItem("initial") == 0) {
+    if (localStorage.getItem("initial") == 0 || localStorage.getItem("isRecord")== 0 ) {
         //do nothing;
     } else
     {
@@ -155,6 +155,7 @@ function getWebsite(url) {
     /* 纯JS实现  */
     var website_url = url.match(/\w+[:][/][/].+[.]?.*[.]?.*[.].+[/]/).toString();
     var website = website_url.match(/.+[.]?.*[.]?.*[.].+/).toString();
+    location.hostname;
     return website;
 }
 

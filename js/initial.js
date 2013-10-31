@@ -27,6 +27,5 @@ if (window.localStorage) {
 }
 
 chrome.browserAction.onClicked.addListener(function(tab) {
-    chrome.tabs.executeScript(null, {file: "js/content_script.js"});
-    chrome.tabs.insertCSS(null, {file: "css/toolbar_style.css"});
+    chrome.tabs.executeScript({code:"document.getElementById('findToolbar').style.display='block'"});
 });
