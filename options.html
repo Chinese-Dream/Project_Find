@@ -2,32 +2,42 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8;"/>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-switch.css">
     <link rel="stylesheet" href="css/options_style.css">
     <title>设置</title>
     <script src="js/jquery-1.10.2.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/bootstrap-switch.min.js"></script>
     <script src="js/options.js"></script>
     <script src="js/analysis.js"></script>
 </head>
 <body>
-<div id="options">
-    <div id="username">用户名：
-        <span class="initial_0"><a class="login">登录</a>或者<a class="trial">离线试用</a></span>
-        <span id="loginUser"></span>
-        <span id="trialUser"></span>
+<div id="options" class="container text-center">
+    <div id="user">
+        <label>Username:</label>
+        <span class="initial"><a class="login">click to login</a>OR<a class="trial">offlineTrial</a></span>
+        <strong id="username" class="text-primary"></strong>
     </div>
     <div id="setting">
-        <p id="isRecord">自动记录:
-            <span class="initial_0">未开启，请先登录</span>
-            <span id="start">未开启<button>点击开启</button></span>
-            <span id="stop">已开启<button>点击暂停</button></span>
-        </p>
+        <label>Auto-Record:</label>
+        <div id="autoRecordSwitch" class="make-switch">
+            <input type="checkbox" checked/>
+        </div><br>
+        <label>Auto-Toolbar(目前为摆设):</label>
+        <div id="autoToolbarSwitch" class="make-switch">
+            <input type="checkbox" checked/>
+        </div>
     </div>
-    <div id="filter">
-        <p>用户过滤列表：</p>
-        <ul id="userFilterList"></ul>
-        <button id="addUrl">添加过滤URL</button>
-        &nbsp;&nbsp;
-        <button id="saveUserFilterList">保存过滤列表</button>
+    <div id="urlList" class="panel panel-default">
+        <div class="panel-heading">Record Rule：</div>
+        <ul id="userFilterList" class="list-group"></ul>
     </div>
+    <button id="addUrl">添加过滤URL</button>
+    &nbsp;&nbsp;
+    <button id="saveUserFilterList">保存过滤列表</button>
+</div>
 </body>
 </html>

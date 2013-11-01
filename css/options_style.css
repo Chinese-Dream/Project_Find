@@ -1,14 +1,3 @@
-div {
-    text-align: center;
-    margin: 0 auto;
-}
-
-p {
-    font-family: Western;
-    font-size: 15px;
-    font-weight: bolder;
-}
-
 a {
     text-decoration: underline;
     color: blue;
@@ -31,4 +20,3 @@ ul.url {
 .delete:hover {
     cursor: pointer;
 }
-
