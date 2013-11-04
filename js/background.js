@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Created with JetBrains WebStorm.
  * User: zxt1016
  * Date: 13-9-28
@@ -153,10 +153,9 @@ function trackData(tab) {
 
 function getWebsite(url) {
     /* 纯JS实现  */
-    var website_url = url.match(/\w+[:][/][/].+[.]?.*[.]?.*[.].+[/]/).toString();
-    var website = website_url.match(/.+[.]?.*[.]?.*[.].+/).toString();
-    location.hostname;
-    return website;
+    var website_url = url.match(/\w+[:][/][/][^/]+[.]?[^/]*[.]?[^/]*[.][^/]+[/]/).toString();
+    var website_name = website_url.match(/[^/]+[.]?[^/]*[.]?[^/]*[.][^/]+/).toString();
+    return website_name;
 }
 
 function getBrowserVer(){
