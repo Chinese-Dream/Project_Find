@@ -143,7 +143,9 @@ function trackData(tab) {
     record.tabId = tab.id;
     record.url = tab.url;                       //捕获url
     record.title = tab.title;                   //捕获title
+    //alert(tab.title);
     record.website = getWebsite(tab.url);       //捕获网站
+    //alert(record.website);
     chrome.tabs.detectLanguage(tab.id, function (lang) {
         records[records.length - 1].lang = lang;
     });                                         //捕获语言
@@ -181,7 +183,7 @@ function isInBookmarks(url){
 function writeToDB(record){
     record.finishTime = new Date();
     var write_record;
-    write_record = {"trackID": trackID, "url": record.url, "urlTitle": record.title, "website": record.website,
+    write_record = {"trackID": trackID, "url": record.url, "title": record.title, "website": record.website,
         "browserVer": browserVer, "startTime": record.startTime, "finishTime": record.finishTime,
         "lang": record.lang, "isInBookmarks": record.isInBookmarks,  "activeTime": record.activeTime, "formerURL": 0};
     write_records.push(write_record);

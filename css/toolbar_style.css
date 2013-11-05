@@ -1,4 +1,17 @@
-#fx-toolbar{
-    height: 50px;
+#fx-toolbar {
+    position: fixed;
+    z-index: 1000;
+    right: 0px;
+    width: 10%;
+    height: 100%;
     background-color: green;
+}
+
+#fx-toolbar-trigger {
+    position: fixed;
+    z-index: 1000;
+    right: 0px;
+    width: 0.5%;
+    height: 100%;
+    background: green;
 }

@@ -10,9 +10,16 @@ var urlOptions = chrome.extension.getURL("options.html");
 var urlStatistics = chrome.extension.getURL("statistics.html");
 var urlHelp = chrome.extension.getURL("help.html");
 var urlAbout = chrome.extension.getURL("about.html");
+var urlData = chrome.extension.getURL("data.html");
 $(function () {
+    var $toolbar_trigger = $("<div id='fx-toolbar-trigger'></div>");
+    $("body").children().first().before($toolbar_trigger);
+
+
+
     var $toolbar = $("<div id='fx-toolbar'></div>");
     $toolbar.css("display", "none");
+    var $page = $("<div></div>");
 
     //toolbar左区域;
     var $toolbar_left = $("<ul id='fx-toolbar-left' class='pull-left list-inline'></ul>");
@@ -30,10 +37,23 @@ $(function () {
     $aHelp.appendTo($toolbar_right);
     var $aAbout = $("<li><a class='btn btn-default' role='button' href='" + urlAbout + "' target='_blank'>about</a></li>");
     $aAbout.appendTo($toolbar_right);
+    var $aData = $("<li><a class='btn btn-default' role='button' href='" + urlData + "' target='_blank'>data</a></li>");
+    $aData.appendTo($toolbar_right);
 
     $toolbar_left.appendTo($toolbar);
     $toolbar_center.appendTo($toolbar);
     $toolbar_right.appendTo($toolbar);
 
     $("body").children().first().before($toolbar);
+
+    $("#fx-toolbar-trigger").hover(function () {
+        $("#fx-toolbar").css("display", "block");
+        $("#fx-toolbar-trigger").css("display", "none");
+    }, function () {
+    });
+    $("#fx-toolbar").hover(function () {
+    }, function () {
+        $("#fx-toolbar-trigger").css("display", "block");
+        $("#fx-toolbar").css("display", "none");
+    });
 });

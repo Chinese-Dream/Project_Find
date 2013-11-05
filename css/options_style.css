@@ -10,13 +10,3 @@ a:hover {
 ul.url {
     list-style-type: disc;
 }
-
-.delete {
-    font-size: small;
-    color: blue;
-    text-decoration: underline;
-}
-
-.delete:hover {
-    cursor: pointer;
-}

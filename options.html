@@ -15,29 +15,34 @@
     <script src="js/analysis.js"></script>
 </head>
 <body>
+<div class="container text-center">
+    <h1>这里是横幅</h1>
+</div>
 <div id="options" class="container text-center">
-    <div id="user">
+    <div id="user" class="text-left">
         <label>Username:</label>
         <span class="initial"><a class="login">click to login</a>OR<a class="trial">offlineTrial</a></span>
         <strong id="username" class="text-primary"></strong>
     </div>
-    <div id="setting">
+    <hr/>
+    <div id="setting" class="text-left">
         <label>Auto-Record:</label>
         <div id="autoRecordSwitch" class="make-switch">
             <input type="checkbox" checked/>
         </div><br>
-        <label>Auto-Toolbar(目前为摆设):</label>
+        <label>Auto-Toolbar:</label>
         <div id="autoToolbarSwitch" class="make-switch">
             <input type="checkbox" checked/>
         </div>
     </div>
+    <hr/>
     <div id="urlList" class="panel panel-default">
-        <div class="panel-heading">Record Rule：</div>
+        <div class="panel-heading text-left">Record Rule：</div>
         <ul id="userFilterList" class="list-group"></ul>
     </div>
-    <button id="addUrl">添加过滤URL</button>
+    <button type="button" id="addUrl" class="btn btn-default">添加过滤URL</button>
     &nbsp;&nbsp;
-    <button id="saveUserFilterList">保存过滤列表</button>
+    <button type="button" id="saveUserFilterList" class="btn btn-default">保存过滤列表</button>
 </div>
 </body>
 </html>

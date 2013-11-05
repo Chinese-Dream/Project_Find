@@ -1,6 +1,11 @@
+Version 0.48---赵小天
+将toolbar设计调整为自动隐藏式边栏；
+优化options.html和options.js代码；
+优化popup.html代码。
+
 Version 0.47---赵小天
 优化options.js代码，提高代码重用性；
-加入bootstrap-switch，优化option.html开关按钮；
+加入bootstrap-switch，优化option.html开关按钮。
 
 Version 0.46---赵小天
 优化内容脚本插入的速度问题；
@@ -49,10 +54,8 @@ Version 0.33---何伟
 Version 0.32－－－赵小天
 更新了background.js文件；
 测试并优化了前台时间相关的代码；
-测试情况顺序：前台打开a；后台打开b；切换b前台；切换a前台；切换b前台；切换a前台；前台打开空页；前台空页刷新至c；切换b前台；切换c前台；
-            前台c刷新至空页；前台关闭空页；前台关闭b；前台关闭a。
-出现问题描述：前台c刷新至空页：c纪录项语言，浏览器版本，网站均为undefined，结束时间误差5秒；
-            最后一个网页关闭后，浏览器退出，onActivated并没有触发，导致最后一个网页的最后一次前台时间没有被纪录。
+测试情况顺序：前台打开a；后台打开b；切换b前台；切换a前台；切换b前台；切换a前台；前台打开空页；前台空页刷新至c；切换b前台；切换c前台；前台c刷新至空页；前台关闭空页；前台关闭b；前台关闭a。
+出现问题描述：前台c刷新至空页：c纪录项语言，浏览器版本，网站均为undefined，结束时间误差5秒；最后一个网页关闭后，浏览器退出，onActivated并没有触发，导致最后一个网页的最后一次前台时间没有被纪录。
 除上述问题外，其他运行良好。
 
 Version 0.31－－－赵小天
@@ -80,7 +83,5 @@ Version 0.25－－－赵小天
 将纪录项封装成为一个Record对象，同时捕获该对象的startTime,url,title,lang等纪录值；
 将系统过滤对象封装成一个函数isInSysFilterList；
 插件将在你每次将被置url的网页更新后弹窗。
-
-注：
-不知道什么原因，在mac os x下chrome测试，需要点击background.html两次后，程序才能正常加载，
+注：不知道什么原因，在mac os x下chrome测试，需要点击background.html两次后，程序才能正常加载，
 所以你测试如果alert弹窗不出现，请按上述操作执行后再测试；或者你打包后安装亦可。

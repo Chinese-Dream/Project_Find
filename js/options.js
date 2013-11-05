@@ -1,3 +1,4 @@
+var urlsMaxLength = 10;
 $(function () {
     if (localStorage.getItem("initial") == 0) {
         $("#username").css("display", "none");
@@ -27,15 +28,16 @@ $(function () {
                 appendToUrlList(urls[i].url);
             }
         }
+
         //监听事件
         $("#addUrl").click(function () {
             var len = $("#userFilterList").find(".url").size();
-            if (len >= 5) {
+            if (len >= urlsMaxLength) {
                 alert("已超过URL数量上限");
                 return
             }
-            if (len!=0 && $("#userFilterList").find(".url")[len - 1].value == "") {
-                alert("请填写上一个");
+            if (len!=0 && $("#userFilterList").find(".url input")[len - 1].value == "") {
+                $("#userFilterList").find(".url input").last().attr("placeholder","The URL is invalid");
             } else {
                appendToUrlList("");
             }
@@ -45,7 +47,7 @@ $(function () {
             var len = $("#userFilterList").children("li").size();
             for (var i = 0; i < len; i++) {
                 var url = new Object();
-                url.url = $("#userFilterList li .url")[i].value;
+                url.url = $("#userFilterList .url input")[i].value;
                 if (url.url != "") {
                     urls.push(url);
                 }
@@ -53,7 +55,7 @@ $(function () {
             localStorage.setItem("userFilterList", JSON.stringify(urls));
         });
         $("#userFilterList").on("click", ".delete", function () {
-            $(this).parent().remove();
+            $(this).parent("span").parent("div").parent("li.url").remove();
         });
         $('#autoRecordSwitch').on('switch-change', function (e, data) {
             localStorage.setItem("autoRecord", data.value);
@@ -89,7 +91,18 @@ function initItem(item, val) {
 }
 
 function appendToUrlList(url) {
-    var $li = $("<li class='list-group-item'>URL:<input type='text' class='url'/><span class='delete'>删除<span/></li>");
+    var $li = $("<li class='list-group-item url'>" +
+        "<div class='input-group'>" +
+        "<span class='input-group-addon'>URL:</span>" +
+        "<input type='text' class='form-control' placeholder='Please Input URL' />" +
+        //"<button type='button' class='btn btn-link delete'>删除</button>" +
+        "<span class='input-group-btn'>" +
+        "<button class='btn btn-default delete' type='button'>删除</button>" +
+        "</span>" +
+        "</div>" +
+    "</li>"
+)
+    ;
     if (url != "") {
         $li.find("input").val(url);
     }

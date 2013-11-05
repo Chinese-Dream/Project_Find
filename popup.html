@@ -9,24 +9,20 @@
     <script src="js/popup.js"></script>
 </head>
 <body>
-<div id="login">
-    <div>
-        <div id="banner">
-            This is a banner!<span id="signUp"><a href="#" class="btn-primary btn-sm">创建一个帐号</a></span>
-        </div>
-        <br>
-
-        <form role="form">
-            <div class="form-group">
-                <input type="text" name="username" class="form-control input-sm" placeholder="Username">
-                <input type="password" name="password" class="form-control input-sm" placeholder="Password">
-                <input type="submit" value="Sing In" class="btn-primary btn-block">
-            </div>
-        </form>
+<div id="login" class="container text-center">
+    <h1 class="text-primary text-left">FaXian</h1>
+    <div id="signUp">
+        <a href="#" class="btn-primary btn-sm">Create an account</a>
     </div>
-    <br>
+    <form role="form">
+        <div class="form-group">
+            <input type="text" name="username" class="form-control input-sm" placeholder="Username">
+            <input type="password" name="password" class="form-control input-sm" placeholder="Password">
+            <input type="submit" value="Sign In" class="btn-primary btn-block">
+        </div>
+    </form>
 </div>
-<div id="offlineTrial">
+<div id="offlineTrial" class="container text-center">
     <p class="text-info">I don't have an account and I don't want to create an account. </p>
     <p>Try to use it offline：<a href="options.html" target="_blank" class="btn-default">Click here!</a></p>
 </div>

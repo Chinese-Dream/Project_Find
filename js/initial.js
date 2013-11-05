@@ -27,5 +27,5 @@ if (window.localStorage) {
 }
 
 chrome.browserAction.onClicked.addListener(function(tab) {
-    chrome.tabs.executeScript({code:"document.getElementById('fx-toolbar').style.display='block'"});
+    //chrome.tabs.executeScript({code:"document.getElementById('fx-toolbar').style.display='block'"});
 });
