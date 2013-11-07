@@ -1,3 +1,9 @@
+Version 0.49---赵小天
+初期优化options.html和options.js代码完毕；
+调整sidebar布局并优化代码；
+增加quickSetting，设计暂不完善，目前与sidebar共存；
+优化部分其余页面代码。
+
 Version 0.48---赵小天
 将toolbar设计调整为自动隐藏式边栏；
 优化options.html和options.js代码；
@@ -26,7 +32,7 @@ Version 0.43---何伟
 
 Version 0.42---赵小天
 将所有html页面按html5标准微调；
-新增initial.js,popup.js,installed.html,installed_style.css文件；
+新增initial.js,login.js,installed.html,installed_style.css文件；
 设置标志位用于标志是否初始化，以后同时还用于区别用户是离线使用还是登录使用；
 优化了部分代码，逻辑微调。
 

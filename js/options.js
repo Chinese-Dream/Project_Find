@@ -1,17 +1,22 @@
 var urlsMaxLength = 10;
+var urls = new Array();
 $(function () {
     if (localStorage.getItem("initial") == 0) {
         $("#username").css("display", "none");
-        $("#urlList").css("display", "none");
+        $(".initialized").css("display", "none");
+        $("#autoRecordSwitch").bootstrapSwitch('setState', false);
+        $("#autoRecordSwitch").bootstrapSwitch('setActive', false);
+        $("#autoToolbarSwitch").bootstrapSwitch('setState', false);
+        $("#autoToolbarSwitch").bootstrapSwitch('setActive', false);
         $(".trial").click(function () {
             localStorage.setItem("initial", 1);
             location.reload();
         });
     }
     else {
-        var urls = new Array();
+        chrome.browserAction.setPopup({popup: 'quickSetting.html'});
+
         $(".initial").css("display","none");
-        chrome.browserAction.setPopup({popup: ''});
         init(localStorage.getItem("initial"));
 
         //界面显示
@@ -34,7 +39,7 @@ $(function () {
             var len = $("#userFilterList").find(".url").size();
             if (len >= urlsMaxLength) {
                 alert("已超过URL数量上限");
-                return
+                return;
             }
             if (len!=0 && $("#userFilterList").find(".url input")[len - 1].value == "") {
                 $("#userFilterList").find(".url input").last().attr("placeholder","The URL is invalid");
@@ -42,21 +47,16 @@ $(function () {
                appendToUrlList("");
             }
         });
-        $("#saveUserFilterList").click(function () {
-            urls.splice(0, urls.length);
-            var len = $("#userFilterList").children("li").size();
-            for (var i = 0; i < len; i++) {
-                var url = new Object();
-                url.url = $("#userFilterList .url input")[i].value;
-                if (url.url != "") {
-                    urls.push(url);
-                }
-            }
-            localStorage.setItem("userFilterList", JSON.stringify(urls));
+
+        $('#userFilterList').on('change','.url input',function(){
+            saveURLsToLocS(urls);
         });
         $("#userFilterList").on("click", ".delete", function () {
             $(this).parent("span").parent("div").parent("li.url").remove();
+            saveURLsToLocS(urls);
         });
+
+        //switch监听事件
         $('#autoRecordSwitch').on('switch-change', function (e, data) {
             localStorage.setItem("autoRecord", data.value);
         });
@@ -92,20 +92,33 @@ function initItem(item, val) {
 
 function appendToUrlList(url) {
     var $li = $("<li class='list-group-item url'>" +
-        "<div class='input-group'>" +
-        "<span class='input-group-addon'>URL:</span>" +
-        "<input type='text' class='form-control' placeholder='Please Input URL' />" +
-        //"<button type='button' class='btn btn-link delete'>删除</button>" +
-        "<span class='input-group-btn'>" +
-        "<button class='btn btn-default delete' type='button'>删除</button>" +
-        "</span>" +
-        "</div>" +
-    "</li>"
-)
-    ;
+            "<div class='input-group'>" +
+            "<span class='input-group-addon'>URL:</span>" +
+            "<input type='text' class='form-control' placeholder='Please Input URL'>" +
+            //"<button type='button' class='btn btn-link delete'>删除</button>" +
+            "<span class='input-group-btn'>" +
+            "<button class='btn btn-default delete' type='button'>" +
+            "<span class='glyphicon glyphicon-minus-sign'></span>" +
+            "</button>" +
+            "</span>" +
+            "</div>" +
+            "</li>");
     if (url != "") {
         $li.find("input").val(url);
     }
     $li.appendTo("#userFilterList");
+}
+
+function saveURLsToLocS(urls){
+    urls.splice(0, urls.length);       //清空urls
+    var len = $("#userFilterList").children("li").size();
+    for (var i = 0; i < len; i++) {
+        var url = new Object();
+        url.url = $("#userFilterList .url input")[i].value;
+        if (url.url != "") {
+            urls.push(url);
+        }
+    }
+    localStorage.setItem("userFilterList", JSON.stringify(urls));
 }
 

@@ -6,7 +6,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8;"/>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-switch.css">
-    <link rel="stylesheet" href="css/options_style.css">
     <title>设置</title>
     <script src="js/jquery-1.10.2.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -14,35 +13,52 @@
     <script src="js/options.js"></script>
     <script src="js/analysis.js"></script>
 </head>
-<body>
-<div class="container text-center">
+<body class="container">
+<div class="text-center">
     <h1>这里是横幅</h1>
 </div>
-<div id="options" class="container text-center">
-    <div id="user" class="text-left">
+<div id="options">
+    <!--基本信息-->
+    <div id="info" class="text-left">
         <label>Username:</label>
-        <span class="initial"><a class="login">click to login</a>OR<a class="trial">offlineTrial</a></span>
+        <span class="initial"><a class="btn btn-link login" role="button">Click to login</a>OR<a class="btn btn-link trial" role="button">Offline trial</a></span>
         <strong id="username" class="text-primary"></strong>
     </div>
     <hr/>
+    <!--设置-->
     <div id="setting" class="text-left">
-        <label>Auto-Record:</label>
-        <div id="autoRecordSwitch" class="make-switch">
-            <input type="checkbox" checked/>
-        </div><br>
-        <label>Auto-Toolbar:</label>
-        <div id="autoToolbarSwitch" class="make-switch">
-            <input type="checkbox" checked/>
-        </div>
+        <table>
+            <!--Auto-Record开关-->
+            <tr>
+                <td>
+                    <label>Auto-Record</label></td>
+                <td>
+                    <div id="autoRecordSwitch" class="make-switch switch-small">
+                        <input type="checkbox" checked/>
+                    </div>
+                </td>
+            </tr>
+            <!--Auto-Toolbar开关-->
+            <tr>
+                <td>
+                    <label>Auto-Toolbar</label></td>
+                <td>
+                    <div id="autoToolbarSwitch" class="make-switch switch-small">
+                        <input type="checkbox" checked/>
+                    </div>
+                </td>
+            </tr>
+        </table>
     </div>
     <hr/>
-    <div id="urlList" class="panel panel-default">
-        <div class="panel-heading text-left">Record Rule：</div>
+    <!--用户过滤规则-->
+    <div class="panel panel-default initialized">
+        <div class="panel-heading text-left">URLs Filter Rule：</div>
         <ul id="userFilterList" class="list-group"></ul>
     </div>
-    <button type="button" id="addUrl" class="btn btn-default">添加过滤URL</button>
-    &nbsp;&nbsp;
-    <button type="button" id="saveUserFilterList" class="btn btn-default">保存过滤列表</button>
+    <div class="text-left initialized">
+        <button type="button" id="addUrl" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;Add a URL</button>
+    </div>
 </div>
 </body>
 </html>

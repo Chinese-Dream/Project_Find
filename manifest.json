@@ -17,8 +17,14 @@
     "content_scripts": [
         {
             "matches": ["http://*/*", "https://*/*"],
-            "css": ["css/bootstrap.min.css", "css/toolbar_style.css"],
+            "css": ["css/toolbar_style.css"],
             "js": ["js/jquery-1.10.2.min.js", "js/content_script.js"]
         }
+    ],
+    "web_accessible_resources": [
+        "images/settings-24.png",
+        "images/home-24.png",
+        "images/statistics-24.png",
+        "js/jquery-1.10.2.min.map"
     ]
 }

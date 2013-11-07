@@ -6,43 +6,43 @@
  * To change this template use File | Settings | File Templates.
  */
 
-var urlOptions = chrome.extension.getURL("options.html");
-var urlStatistics = chrome.extension.getURL("statistics.html");
-var urlHelp = chrome.extension.getURL("help.html");
-var urlAbout = chrome.extension.getURL("about.html");
-var urlData = chrome.extension.getURL("data.html");
 $(function () {
     var $toolbar_trigger = $("<div id='fx-toolbar-trigger'></div>");
     $("body").children().first().before($toolbar_trigger);
 
-
-
     var $toolbar = $("<div id='fx-toolbar'></div>");
     $toolbar.css("display", "none");
-    var $page = $("<div></div>");
 
-    //toolbar左区域;
-    var $toolbar_left = $("<ul id='fx-toolbar-left' class='pull-left list-inline'></ul>");
+    var $username = $("<h1>username</h1><hr>");
+    $username.appendTo($toolbar);
 
-    //toolbar中区域;
-    var $toolbar_center = $("<ul id='fx-toolbar-center' class='list-inline'></ul>");
+    var $statisticsLink = $("<a target='_blank' href='#'><img src='" + chrome.extension.getURL('images/home-24.png') + "'></a>");
+    $statisticsLink.appendTo($toolbar);
+    var $statisticsLink = $("<a target='_blank' href='" + chrome.extension.getURL('statistics.html') + "'><img src='" + chrome.extension.getURL('images/statistics-24.png') + "'></a>");
+    $statisticsLink.appendTo($toolbar);
+    var $optionsLink = $("<a target='_blank' href='" + chrome.extension.getURL('options.html') + "'><img src='" + chrome.extension.getURL('images/settings-24.png') + "'></a><br><br>");
+    $optionsLink.appendTo($toolbar);
 
-    //toolbar右区域;
-    var $toolbar_right = $("<ul id='fx-toolbar-right' class='pull-right list-inline'></ul>");
-    var $aOptions = $("<li><a class='btn btn-default' role='button' href='" + urlOptions + "' target='_blank'>options</a></li>");
-    $aOptions.appendTo($toolbar_right);
-    var $aStatistics = $("<li><a class='btn btn-default' role='button' href='" + urlStatistics + "' target='_blank'>statistics</a></li>");
-    $aStatistics.appendTo($toolbar_right);
-    var $aHelp = $("<li><a class='btn btn-default' role='button' href='" + urlHelp + "' target='_blank'>help</a></li>");
-    $aHelp.appendTo($toolbar_right);
-    var $aAbout = $("<li><a class='btn btn-default' role='button' href='" + urlAbout + "' target='_blank'>about</a></li>");
-    $aAbout.appendTo($toolbar_right);
-    var $aData = $("<li><a class='btn btn-default' role='button' href='" + urlData + "' target='_blank'>data</a></li>");
-    $aData.appendTo($toolbar_right);
 
-    $toolbar_left.appendTo($toolbar);
-    $toolbar_center.appendTo($toolbar);
-    $toolbar_right.appendTo($toolbar);
+    var $main = $("<div>" +
+        "<ul>" +
+        "<li><button class='button orange button-inline'>好</button>&nbsp;&nbsp;<button class='button orange button-inline'>不好</button></li>" +
+        "<Li><button class='button orange button-block'>随意</button></Li>" +
+        "<li><button class='button orange button-block'>分享</button></li>" +
+        "</ul>" +
+        "</div>");
+    $main.appendTo($toolbar);
+
+    //这里代码需要置换
+    var $other = $("<div>" +
+        "<ul>" +
+        "<li><a href='" + chrome.extension.getURL('help.html') + "' target='_blank'>help</a></li>" +
+        "<li><a href='" + chrome.extension.getURL('about.html') + "' target='_blank'>about</a></li>" +
+        "<li><a href='" + chrome.extension.getURL('data.html') + "' target='_blank'>data</a></li>" +
+        "</ul>" +
+        "</div>");
+    $other.appendTo($toolbar);
+    //置换到这里
 
     $("body").children().first().before($toolbar);
 
