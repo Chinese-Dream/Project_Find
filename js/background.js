@@ -1,6 +1,6 @@
 ﻿/**
  * Created with JetBrains WebStorm.
- * User: zxt1016
+ * User: re0marb1e
  * Date: 13-9-28
  * Time: 上午9:13
  * To change this template use File | Settings | File Templates.
@@ -24,13 +24,18 @@ var write_records = [];
  */
 var browserVer = getBrowserVer();
 /**
- * Tab更新时间监听；
+ * Tab更新监听；
+ * 每当系统产生一条Record，则在其之前Tab必定会更新；
  */
 chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
-    //当Tab更新时，我们首先查看此Tab之前的URL纪录，如果存在，则结束此条URL纪录并将纪录信息写入数据库，同时从records中删除此纪录
-    if (localStorage.getItem("initial") == 0 || localStorage.getItem("autoRecord")== "false" ) {
+    //当Tab更新时，我们首先检测是否开启记录。如果未开启，则不执行任何操作
+    if (localStorage.getItem("userType") == 0 || localStorage.getItem("autoRecord")== "false" ) {
         //do nothing;
-    } else
+    }
+    //如果记录开启，我们则查找此Tab之前的纪录；
+    // 如果存在，则结束此条纪录并将纪录信息写入数据库，同时从records中删除此纪录；
+    // 如果不存在，
+    else
     {
         if (changeInfo.status == "loading") {
             //只有当更新的tab页是当前页是才需要刷新activeTime；
@@ -40,12 +45,11 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
                 if (formerRecordIdx != -1) {
                     var formerRecord = records[formerRecordIdx];
                     formerRecord.activeTime += getTimeInterval(activeStartTime, activeFinishTime);
-                    //alert("前台开始时间：" + activeStartTime + "\n前台结束时间：" + activeFinishTime + "\n时间间隔：" + "前台时间累计：" + formerRecord.activeTime);
-                    writeToDB(formerRecord);
-                    records.splice(formerRecordIdx, 1);
+                    removeRecordByIdx(formerRecordIdx);
                 }
                 activeStartTime = activeFinishTime;
             }
+            // 检查新网址是否应该被过滤掉，如果不被过滤掉，则新记录开始；
             if (isInSysFilterList(tab.url) == false && isInUserFilterList(tab.url) == false) {
                 //网页纪录开始；
                 trackData(tab);
@@ -60,8 +64,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 chrome.tabs.onRemoved.addListener(function (tabId, removeInfo) {
     var index = getRecordIdxByTabId(tabId);
     if (index != -1) {
-        writeToDB(records[index]);
-        records.splice(index, 1);
+        removeRecordByIdx(index);
     }
 });
 
@@ -72,12 +75,14 @@ chrome.tabs.onActivated.addListener(function (activeInfo) {
     activeFinishTime = new Date();
     var formerRecordIdx = getActiveRecordIdx();
     var currentRecordIdx = getRecordIdxByTabId(activeInfo.tabId);
-    if (formerRecordIdx != -1) {            //前activeRecord对象存在
+    //前activeRecord对象存在
+    if (formerRecordIdx != -1) {
         var formerRecord = records[formerRecordIdx];
         formerRecord.activeTime += getTimeInterval(activeStartTime, activeFinishTime);
-        //alert("前台开始时间：" + activeStartTime + "\n前台结束时间：" + activeFinishTime + "前台时间累计：" + formerRecord.activeTime);
         formerRecord.active = false;
     }
+
+    // 当前activeRecord对象存在
     if (currentRecordIdx != -1) {
         var currentRecord = records[currentRecordIdx];
         currentRecord.active = true;
@@ -110,30 +115,6 @@ function getTimeInterval(start , finish){
     return Math.round((finish-start)/1000);
 }
 
-
-/*    是否在系统过滤列表，如果在，返回true，否则返回false；
- *    此函数后期重点完善，过滤冗余信息；
- *    google跳转，网页加载不成功等等；
- */
-function isInSysFilterList(url) {
-    if (url.indexOf("chrome-extension://")>=0 || url.indexOf("chrome://")>=0 || url.indexOf("file://")>=0
-        || url.indexOf("chrome-devtools://")>=0) {
-        return true;
-    }
-    return false;
-}
-
-/*   是否在用户过滤列表，如果在，返回true，否则返回false    */
-function isInUserFilterList(url) {
-    var urls = JSON.parse(localStorage.getItem("userFilterList"));
-    for(var i=0;i<urls.length;i++){
-        if(url.indexOf(urls[i].url)>=0){
-            return true;
-        }
-    }
-    return false;
-}
-
 function trackData(tab) {
     var record = new Object();
     records.push(record);
@@ -143,9 +124,7 @@ function trackData(tab) {
     record.tabId = tab.id;
     record.url = tab.url;                       //捕获url
     record.title = tab.title;                   //捕获title
-    //alert(tab.title);
     record.website = getWebsite(tab.url);       //捕获网站
-    //alert(record.website);
     chrome.tabs.detectLanguage(tab.id, function (lang) {
         records[records.length - 1].lang = lang;
     });                                         //捕获语言
@@ -180,10 +159,15 @@ function isInBookmarks(url){
     /*           */
 }
 
-function writeToDB(record){
+function removeRecordByIdx(index){
+    var record = records[index];
     record.finishTime = new Date();
-    var write_record;
-    write_record = {"trackID": trackID, "url": record.url, "title": record.title, "website": record.website,
+    writeToLocS(record);
+    records.splice(index, 1);
+}
+
+function writeToLocS(record){
+    var write_record = {"trackID": trackID, "url": record.url, "title": record.title, "website": record.website,
         "browserVer": browserVer, "startTime": record.startTime, "finishTime": record.finishTime,
         "lang": record.lang, "isInBookmarks": record.isInBookmarks,  "activeTime": record.activeTime, "formerURL": 0};
     write_records.push(write_record);

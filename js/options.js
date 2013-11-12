@@ -1,31 +1,26 @@
 var urlsMaxLength = 10;
 var urls = new Array();
+
+function setInactiveState(){
+    $(".rel-active").css("display", "none");
+    $("#autoRecordSwitch").bootstrapSwitch('setState', false);
+    $("#autoRecordSwitch").bootstrapSwitch('setActive', false);
+    $("#autoSidebarSwitch").bootstrapSwitch('setState', false);
+    $("#autoSidebarSwitch").bootstrapSwitch('setActive', false);
+}
+
 $(function () {
-    if (localStorage.getItem("initial") == 0) {
-        $("#username").css("display", "none");
-        $(".initialized").css("display", "none");
-        $("#autoRecordSwitch").bootstrapSwitch('setState', false);
-        $("#autoRecordSwitch").bootstrapSwitch('setActive', false);
-        $("#autoToolbarSwitch").bootstrapSwitch('setState', false);
-        $("#autoToolbarSwitch").bootstrapSwitch('setActive', false);
-        $(".trial").click(function () {
-            localStorage.setItem("initial", 1);
-            location.reload();
-        });
+    if (localStorage.getItem("userType") == 0) {
+        setInactiveState();
     }
     else {
         chrome.browserAction.setPopup({popup: 'quickSetting.html'});
-
-        $(".initial").css("display","none");
-        init(localStorage.getItem("initial"));
+        $(".rel-inactive").css("display","none");
+        var userType = localStorage.getItem("userType");
+        init(userType);
 
         //界面显示
         $("#username").text(localStorage.getItem("username"));
-        if(localStorage.getItem("autoRecord")=="true"){
-            $('#autoRecordSwitch').bootstrapSwitch('setState', true);
-        } else{
-            $('#autoRecordSwitch').bootstrapSwitch('setState', false);
-        }
 
         if (localStorage.userFilterList) {
             urls = JSON.parse(localStorage.getItem("userFilterList"));
@@ -33,7 +28,6 @@ $(function () {
                 appendToUrlList(urls[i].url);
             }
         }
-
         //监听事件
         $("#addUrl").click(function () {
             var len = $("#userFilterList").find(".url").size();
@@ -47,44 +41,39 @@ $(function () {
                appendToUrlList("");
             }
         });
-
         $('#userFilterList').on('change','.url input',function(){
-            saveURLsToLocS(urls);
+            setUserFilterList(urls);
         });
         $("#userFilterList").on("click", ".delete", function () {
             $(this).parent("span").parent("div").parent("li.url").remove();
-            saveURLsToLocS(urls);
-        });
-
-        //switch监听事件
-        $('#autoRecordSwitch').on('switch-change', function (e, data) {
-            localStorage.setItem("autoRecord", data.value);
+            setUserFilterList(urls);
         });
     }
 });
 
-//根据initial的情况初始化设置;
-function init(initial) {
+//根据userType的情况初始化设置;
+function init(userType) {
     //是否开启自动记录
-    initItem("autoRecord", true);
-    initItem("autoToolbar", true);
-    //根据initial的情况初始化设置
-    if (initial == 1) {
-        initItem("username", "default");
-        initItem("userFilterList", "[]");
+    initLocStorageItem("autoRecord", true);
+    initLocStorageItem("autoSidebar", true);
+    //根据userType的情况初始化设置
+    if (userType == 1) {
+        initLocStorageItem("username", "default");
+        initLocStorageItem("userFilterList", "[]");
     }
-    if (initial == 2) {
+    if (userType == 2) {
         //登录初始化，获取用户设置等一系列储存在云端的数据；
         //同时存储在本地做一份备份；
         //如果用户本地修改设置，则即时联网备份；
         //web端不提供给用户修改记录设置的功能；
-        initItem("username", "default");
-        initItem("userFilterList", "[]");
+        initLocStorageItem("username", "default");
+        initLocStorageItem("userFilterList", "[]");
     }
 }
 
-//如果item项不存在，则初始化item值为val，如果存在，则不操作；
-function initItem(item, val) {
+// 初始化localStorage中的item项；
+// 如果item项不存在，则初始化item值为val，如果存在，则不操作；
+function initLocStorageItem(item,val){
     if (!localStorage.getItem(item)) {
         localStorage.setItem(item, val);
     }
@@ -92,25 +81,26 @@ function initItem(item, val) {
 
 function appendToUrlList(url) {
     var $li = $("<li class='list-group-item url'>" +
-            "<div class='input-group'>" +
-            "<span class='input-group-addon'>URL:</span>" +
-            "<input type='text' class='form-control' placeholder='Please Input URL'>" +
-            //"<button type='button' class='btn btn-link delete'>删除</button>" +
-            "<span class='input-group-btn'>" +
-            "<button class='btn btn-default delete' type='button'>" +
-            "<span class='glyphicon glyphicon-minus-sign'></span>" +
-            "</button>" +
-            "</span>" +
-            "</div>" +
-            "</li>");
+        "<div class='input-group'>" +
+        "<span class='input-group-addon'>URL:</span>" +
+        "<input type='text' class='form-control' placeholder='Please Input URL'>" +
+        //"<button type='button' class='btn btn-link delete'>删除</button>" +
+        "<span class='input-group-btn'>" +
+        "<button class='btn btn-default delete' type='button'>" +
+        "<span class='glyphicon glyphicon-minus-sign'></span>" +
+        "</button>" +
+        "</span>" +
+        "</div>" +
+        "</li>");
     if (url != "") {
         $li.find("input").val(url);
     }
     $li.appendTo("#userFilterList");
 }
 
-function saveURLsToLocS(urls){
-    urls.splice(0, urls.length);       //清空urls
+//清空原数组对象，并把urls数组存入localStorage中;
+function setUserFilterList(urls){
+    urls.splice(0, urls.length);       //清空urls；
     var len = $("#userFilterList").children("li").size();
     for (var i = 0; i < len; i++) {
         var url = new Object();
@@ -121,4 +111,3 @@ function saveURLsToLocS(urls){
     }
     localStorage.setItem("userFilterList", JSON.stringify(urls));
 }
-

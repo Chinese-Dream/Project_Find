@@ -3,61 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8;"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8;">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-switch.css">
     <title>设置</title>
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-switch.min.js"></script>
+    <!--引入的js-->
+    <script src="js/ref/jquery-1.10.2.min.js"></script>
+    <script src="js/ref/bootstrap.min.js"></script>
+    <script src="js/ref/bootstrap-switch.min.js"></script>
+    <!--我的js-->
     <script src="js/options.js"></script>
-    <script src="js/analysis.js"></script>
+    <script src="js/state-handler.js"></script>
+    <script src="js/switch-handler.js"></script>
 </head>
 <body class="container">
-<div class="text-center">
-    <h1>这里是横幅</h1>
+<div class="text-center text-primary">
+    <h1>FaXian</h1>
 </div>
+
 <div id="options">
     <!--基本信息-->
     <div id="info" class="text-left">
         <label>Username:</label>
-        <span class="initial"><a class="btn btn-link login" role="button">Click to login</a>OR<a class="btn btn-link trial" role="button">Offline trial</a></span>
-        <strong id="username" class="text-primary"></strong>
+        <span class="rel-inactive">
+            <a class="btn btn-link login" role="button">Click to login</a>
+            OR
+            <a id="offlineTrialLink" class="btn btn-link" role="button">Offline trial</a>
+        </span>
+        <strong id="username" class="text-primary activeState"></strong>
     </div>
-    <hr/>
     <!--设置-->
-    <div id="setting" class="text-left">
-        <table>
-            <!--Auto-Record开关-->
+    <div id="setting" class="panel panel-default text-left">
+        <div class="panel-heading">
+            Setting:
+        </div>
+        <table class="table">
+            <!--Auto-Record Switch-->
             <tr>
-                <td>
-                    <label>Auto-Record</label></td>
+                <td class="td-header">
+                    <label>Auto-Record</label>
+                </td>
                 <td>
                     <div id="autoRecordSwitch" class="make-switch switch-small">
                         <input type="checkbox" checked/>
                     </div>
                 </td>
             </tr>
-            <!--Auto-Toolbar开关-->
+            <!--Auto-Sidebar Switch-->
             <tr>
+                <td class="td-header">
+                    <label>Auto-Sidebar</label>
+                </td>
                 <td>
-                    <label>Auto-Toolbar</label></td>
-                <td>
-                    <div id="autoToolbarSwitch" class="make-switch switch-small">
+                    <div id="autoSidebarSwitch" class="make-switch switch-small">
                         <input type="checkbox" checked/>
                     </div>
                 </td>
             </tr>
+            <!--Sidebar-Location Radios-->
+            <tr>
+                <td class="td-header">
+                    <label>Sidebar-Location</label>
+                </td>
+                <td>
+                    <label class="radio-inline">
+                        <input type="radio" name="optionsRadios" id="optionsRadiosLeft" value="option1" checked>Left
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="optionsRadios" id="optionsRadiosRight" value="option1" checked>Right
+                    </label>
+                </td>
+            </tr>
         </table>
     </div>
-    <hr/>
     <!--用户过滤规则-->
-    <div class="panel panel-default initialized">
+    <div class="panel panel-default rel-active">
         <div class="panel-heading text-left">URLs Filter Rule：</div>
         <ul id="userFilterList" class="list-group"></ul>
     </div>
-    <div class="text-left initialized">
-        <button type="button" id="addUrl" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;Add a URL</button>
+    <div class="text-left rel-active">
+        <button type="button" id="addUrl" class="btn btn-default"><span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;Add
+            a URL
+        </button>
     </div>
 </div>
 </body>

@@ -4,7 +4,8 @@
 $(function(){
     var records = JSON.parse(localStorage.getItem("records"));
     for(var i=0;i<records.length;i++){
-        var $tr= $("<tr><td>"+ records[i].trackID +"</td>" +
+        var $tr= $("<tr>" +
+            "<td>"+ records[i].trackID +"</td>" +
             "<td>"+ records[i].url +"</td>" +
             "<td>"+ records[i].title +"</td>" +
             "<td>"+ records[i].website +"</td>" +
@@ -14,7 +15,8 @@ $(function(){
             "<td>"+ records[i].lang +"</td>" +
             "<td>"+ records[i].isInBookmarks +"</td>" +
             "<td>"+ records[i].activeTime +"</td>" +
-            "<td>"+ records[i].formerURL +"</td></tr>");
+            "<td>"+ records[i].formerURL +"</td>" +
+            "</tr>");
         $tr.appendTo("table");
 
     }

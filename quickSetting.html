@@ -8,9 +8,11 @@
     <link rel="stylesheet" href="css/bootstrap-switch.css">
     <link rel="stylesheet" href="css/quickSetting_style.css">
     <title>Quick Setting</title>
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/bootstrap-switch.min.js"></script>
+    <script src="js/ref/jquery-1.10.2.min.js"></script>
+    <script src="js/ref/bootstrap.min.js"></script>
+    <script src="js/ref/bootstrap-switch.min.js"></script>
+
+    <script src="js/switch-handler.js"></script>
 </head>
 <body>
 <ul class="container text-center list-unstyled">
@@ -18,11 +20,20 @@
         <h5>Quick Setting</h5>
     </li>
     <li>
-        <label>Auto-Record:</label>
+        <label>Auto-Record</label>
 
         <div id="autoRecordSwitch" class="make-switch switch-mini">
             <input type="checkbox" checked/>
         </div>
+    </li>
+    <li>
+        <label>Auto-Sidebar</label>
+        <div id="autoSidebarSwitch" class="make-switch switch-mini">
+            <input type="checkbox" checked/>
+        </div>
+    </li>
+    <li>
+        <button type="button" class="btn btn-primary">Add a Filter Rule</button>
     </li>
     <li>
         <a href="options.html" target="_blank">

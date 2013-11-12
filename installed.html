@@ -3,29 +3,27 @@
 <head>
     <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Find:Installed</title>
-    <link rel="stylesheet" href="css/installed_style.css">
+    <title>fx-Chrome:Installed</title>
     <link rel="stylesheet" href="css/bootstrap.min.css">
-    <script src="js/jquery-1.10.2.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/installed.js"></script>
+    <script src="js/ref/jquery-1.10.2.min.js"></script>
+    <script src="js/ref/bootstrap.min.js"></script>
+    <script src="js/state-handler.js"></script>
 </head>
 <body>
-<div id="banner">这里是横幅</div>
-<div id="nextToDo">
+<div id="banner" class="container text-center">这里是横幅</div>
+<div id="nextToDo" class="container text-center">
     <h1>Thanks for installing Find for Chrome.</h1>
 	<h1>What to do now:</h1>
     <button class="btn btn-primary" type="button" data-toggle="modal" data-target="#loginModal"/>登陆</button>&nbsp;&nbsp;
-    <a href="options.html" class="btn btn-primary" role="button">离线试用</a>
+    <a href="options.html" id="offlineTrialLink" class="btn btn-primary" role="button">Offline trial</a>
 </div>
-<div id="about">
+<div id="about" class="container text-center">
     <h2>Then, we will:</h2>
     <ul class="list-group">
         <li class="list-group-item">自动纪录你的上网数据（你可以自定义很多设置，来规避敏感信息）</li>
         <li class="list-group-item">帮助你发现有趣的网站</li>
     </ul>
 </div>
-
 
 <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog">
@@ -34,26 +32,26 @@
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h2 class="modal-title text-center" id="myModalLabel">Sign In</h2>
             </div>
+
             <div class="modal-body">
                 <form role="form">
                     <div class="form-group">
                         <input type="email" class="form-control input-lg" id="inputemail" placeholder="Email address">
                     </div>
-                     <div class="form-group">
-                         <input type="password" class="form-control input-lg" id="inputpassword" placeholder="Password">
-                     </div>
-                     <div class="checkbox">
-                          <label>
-                              <input type="checkbox" value="Remember me">Remember me
-                          </label>
-                     </div>
+                    <div class="form-group">
+                        <input type="password" class="form-control input-lg" id="inputpassword" placeholder="Password">
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" value="Remember me">Remember me
+                        </label>
+                    </div>
                     <div class="button">
                         <button type="submit" class="btn btn-default btn-lg btn-block">Sign In</button>
                         <a href="#" class="btn btn-primary btn-lg btn-block">New User? Sign Up!</a>
                     </div>
                 </form>
             </div>
-
         </div>
     </div>
 </div>

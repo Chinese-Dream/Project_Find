@@ -12,19 +12,21 @@
         "storage", "bookmarks", "tabs", "webRequest", "http://*/*", "https://*/*"
     ],
     "background": {
-        "scripts": ["js/jquery-1.10.2.min.js", "js/initial.js", "js/background.js"]
+        "scripts": ["js/ref/jquery-1.10.2.min.js", "js/initial.js", "js/filter-user.js","js/filter-system.js","js/background.js"]
     },
     "content_scripts": [
         {
             "matches": ["http://*/*", "https://*/*"],
-            "css": ["css/toolbar_style.css"],
-            "js": ["js/jquery-1.10.2.min.js", "js/content_script.js"]
+            "css": ["css/sidebar_style.css"],
+            "js": ["js/ref/jquery-1.10.2.min.js", "js/sidebar-constructor.js","js/sidebar-handler.js"]
         }
     ],
     "web_accessible_resources": [
         "images/settings-24.png",
         "images/home-24.png",
         "images/statistics-24.png",
-        "js/jquery-1.10.2.min.map"
+        "images/questionmark-24.png",
+        "images/information-24.png",
+        "js/ref/jquery-1.10.2.min.map"
     ]
 }
