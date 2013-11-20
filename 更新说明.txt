@@ -1,3 +1,11 @@
+Version 0.55---赵小天
+background.js拆分；
+删除activeStartTime，activeFinishTime全局变量，删除record.activeTime属性，新增record.activeTimeInterval属性，相应代码调整；
+删除trackData函数，新增record对象构造函数，record.isActive方法和record.pushTimeInterval，相应代码调整；
+删除record.active属性，新增activeRecordIdx全局变量，相应代码调整；
+record.website属性修改为record.hostname，获取方法亦做修改；
+新增isLastActiveRecordExist和isLastActiveTimeIntervalDone方法。
+
 Version 0.50---赵小天
 结构优化。
 

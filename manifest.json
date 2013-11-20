@@ -12,7 +12,7 @@
         "storage", "bookmarks", "tabs", "webRequest", "http://*/*", "https://*/*"
     ],
     "background": {
-        "scripts": ["js/ref/jquery-1.10.2.min.js", "js/initial.js", "js/filter-user.js","js/filter-system.js","js/background.js"]
+        "scripts": ["js/ref/jquery-1.10.2.min.js", "js/initial.js", "js/filter-user.js","js/filter-system.js","js/background.js","js/background-listener.js"]
     },
     "content_scripts": [
         {

@@ -8,13 +8,13 @@ $(function(){
             "<td>"+ records[i].trackID +"</td>" +
             "<td>"+ records[i].url +"</td>" +
             "<td>"+ records[i].title +"</td>" +
-            "<td>"+ records[i].website +"</td>" +
+            "<td>"+ records[i].hostname +"</td>" +
             "<td>"+ records[i].browserVer +"</td>" +
             "<td>"+ records[i].startTime +"</td>" +
             "<td>"+ records[i].finishTime +"</td>" +
             "<td>"+ records[i].lang +"</td>" +
             "<td>"+ records[i].isInBookmarks +"</td>" +
-            "<td>"+ records[i].activeTime +"</td>" +
+            "<td>"+ records[i].activeTimeInterval +"</td>" +
             "<td>"+ records[i].formerURL +"</td>" +
             "</tr>");
         $tr.appendTo("table");
