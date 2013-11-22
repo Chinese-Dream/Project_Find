@@ -1,3 +1,8 @@
+Version 0.57---赵小天
+新增timeInterval对象构造函数；
+以数组对象为基础，包装Records对象和TimeIntervals对象；
+代码优化和调整。
+
 Version 0.55---赵小天
 background.js拆分；
 删除activeStartTime，activeFinishTime全局变量，删除record.activeTime属性，新增record.activeTimeInterval属性，相应代码调整；

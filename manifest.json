@@ -12,13 +12,13 @@
         "storage", "bookmarks", "tabs", "webRequest", "http://*/*", "https://*/*"
     ],
     "background": {
-        "scripts": ["js/ref/jquery-1.10.2.min.js", "js/initial.js", "js/filter-user.js","js/filter-system.js","js/background.js","js/background-listener.js"]
+        "scripts": ["js/ref/jquery-1.10.2.min.js", "js/initial.js", "js/filter-user.js", "js/filter-system.js", "js/timeInterval.js", "js/background-listener.js", "js/background.js"]
     },
     "content_scripts": [
         {
             "matches": ["http://*/*", "https://*/*"],
             "css": ["css/sidebar_style.css"],
-            "js": ["js/ref/jquery-1.10.2.min.js", "js/sidebar-constructor.js","js/sidebar-handler.js"]
+            "js": ["js/ref/jquery-1.10.2.min.js", "js/sidebar-constructor.js", "js/sidebar-handler.js"]
         }
     ],
     "web_accessible_resources": [
