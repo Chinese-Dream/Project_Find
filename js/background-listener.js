@@ -6,13 +6,6 @@
  * To change this template use File | Settings | File Templates.
  */
 
-
-function startRecord() {
-    chrome.tabs.onUpdated.addListener(tabsOnUpdatedHandler);
-    chrome.tabs.onRemoved.addListener(tabsOnRemovedHandler);
-    chrome.tabs.onActivated.addListener(tabsOnActivatedHandler);
-    chrome.windows.onFocusChanged.addListener(windowsOnFocusChanged);
-};
 /**
  * Tab更新监听;
  * 每当创建一个Tab或者刷新一个Tab时，该事件都会触发;
@@ -24,26 +17,11 @@ function tabsOnUpdatedHandler(tabId, changeInfo, tab) {
         if (changeInfo.status == "loading") {
             //只有当刷新一个Tab时，被刷新的Tab的formerRecord才有可能存在；
             var formerRecordIdx = records.getRecordIdxByTabId(tabId);
-            records.onRemovedHandler(formerRecordIdx);
+            records.removeRecord(formerRecordIdx);
 
             // 检查新网址是否应该被过滤掉，如果不被过滤掉，则新记录开始;
             if (isInSysFilterList(tab.url) == false && isInUserFilterList(tab.url) == false) {
-                var datetime = new Date();
-                //创建record对象;
-                var record = new Record(datetime, tab.id, tab.url, tab.title);
-                records.push(record);
-                chrome.tabs.detectLanguage(tab.id, function (lang) {
-                    records.last().lang = lang;
-                });
-                if (tab.active == true) {     //tab处于active状态
-                    chrome.windows.get(tab.windowId, function (window) {
-                        if (window.focused == true) {     //window处于focused状态
-                            records.lastActiveRecordIdx = records.length - 1;
-                            var timeInterval = new TimeInterval(datetime, 0);
-                            records.last().activeTimeIntervals.pushTimeInterval(timeInterval);
-                        }
-                    });
-                }
+                records.createRecord(tab);
             }
         }
     }
@@ -52,7 +30,7 @@ function tabsOnUpdatedHandler(tabId, changeInfo, tab) {
 function tabsOnRemovedHandler(tabId, removeInfo) {
     if (readyToRecord()) {
         var index = records.getRecordIdxByTabId(tabId);
-        records.onRemovedHandler(index);
+        records.removeRecord(index);
     }
 }
 
@@ -81,13 +59,5 @@ function tabsOnActivatedHandler(activeInfo) {
 }
 
 function windowsOnFocusChanged(windowId) {
-        //alert("窗口改变" + windowId);
-}
-
-function readyToRecord() {
-    if (localStorage.getItem("userType") == 0 || localStorage.getItem("autoRecord") == "false") {
-        return false;
-    } else {
-        return true;
-    }
+    //alert("窗口改变" + windowId);
 }

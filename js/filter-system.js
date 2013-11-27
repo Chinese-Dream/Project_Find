@@ -7,8 +7,8 @@
  *    google跳转，网页加载不成功等等；
  */
 function isInSysFilterList(url) {
-    if (url.indexOf("chrome-extension://")>=0 || url.indexOf("chrome://")>=0 || url.indexOf("file://")>=0
-        || url.indexOf("chrome-devtools://")>=0 || url.indexOf("chrome-search://")>=0) {
+    if (url.indexOf("chrome-extension://") >= 0 || url.indexOf("chrome://") >= 0 || url.indexOf("file://") >= 0
+        || url.indexOf("chrome-devtools://") >= 0 || url.indexOf("chrome-search://") >= 0) {
         return true;
     }
     return false;

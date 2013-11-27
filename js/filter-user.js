@@ -12,7 +12,3 @@ function isInUserFilterList(url) {
     }
     return false;
 }
-
-function appendToUserFilterList(url) {
-
-}

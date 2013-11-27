@@ -3,9 +3,9 @@
  */
 
 /**
- *TimeInterval对象构造函数：
- *时间间隔对象有两个属性：startTime代表该时间间隔的起始时间，finishTime代表该时间间隔的结束时间;
- *创建对象时，请传递两个参数startTime和finishTime，如果缺省请手动传入0;
+ * TimeInterval对象构造函数:
+ * 时间间隔对象有两个属性:startTime代表该时间间隔的起始时间，finishTime代表该时间间隔的结束时间;
+ * 创建对象时，请传递两个参数startTime和finishTime，如果缺省请手动传入0;
  */
 function TimeInterval(startTime, finishTime) {
     this.startTime = startTime;
