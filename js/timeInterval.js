@@ -5,25 +5,38 @@
 /**
  * TimeInterval对象构造函数:
  * 时间间隔对象有两个属性:startTime代表该时间间隔的起始时间，finishTime代表该时间间隔的结束时间;
- * 创建对象时，请传递两个参数startTime和finishTime，如果缺省请手动传入0;
  */
-function TimeInterval(startTime, finishTime) {
-    this.startTime = startTime;
-    this.finishTime = finishTime;
-    this.setStartTime = function (startTime) {
-        if (this.startTime == 0) {
+function TimeInterval() {
+    this.startTime = arguments[0];
+    this.finishTime = arguments[1];
+    this.setStartTime = function (startTime, isOverride) {
+        //重写startTime;
+        if(isOverride==true){
             this.startTime = startTime;
             return true;
-        } else {
-            return false;
+        }
+        //不重写startTime;
+        else{
+            if (this.startTime == undefined) {
+                this.startTime = startTime;
+                return true;
+            } else {
+                return false;
+            }
         }
     }
-    this.setFinishTime = function (finishTime) {
-        if (this.finishTime == 0) {
+    this.setFinishTime = function (finishTime, isOverride) {
+        if (isOverride == true) {
             this.finishTime = finishTime;
             return true;
-        } else {
-            return false;
+        }
+        else {
+            if (this.finishTime == undefined) {
+                this.finishTime = finishTime;
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 }

@@ -15,6 +15,7 @@ function startRecord() {
 
 var browserVer = getBrowserVer();
 var records = new Records();
+
 startRecord();
 if (window.localStorage) {
     if (!localStorage.userType) {
@@ -35,6 +36,15 @@ if (window.localStorage) {
 } else {
     alert("Your browser don't support localStorage");
 }
+
+chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
+    if (request.info == "ok") {
+        sendResponse({
+            autoSidebar: localStorage.getItem("autoSidebar"),
+            username: localStorage.getItem("username")
+        });
+    }
+});
 
 /*
 window.addEventListener("storage",handle_storage,false);

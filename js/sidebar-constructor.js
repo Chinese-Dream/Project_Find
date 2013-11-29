@@ -6,15 +6,27 @@
  * To change this template use File | Settings | File Templates.
  */
 
-// 这里禁止声明任何全局变量，以防止任何不可遇见的冲突；
-$(function () {
+var autoRecord;
+var autoSidebar;
+var username;
+var sidebarLocation;
+
+chrome.runtime.sendMessage({info: "ok"}, function (response) {
+    autoSidebar = response.autoSidebar;
+    username = response.username;
+    if(autoSidebar == "true"){
+        $(sidebarConstructor());
+    }
+});
+
+function sidebarConstructor() {
     var $sidebar_trigger = $("<div id='fx-sidebar-trigger'></div>");
     $("body").children().first().before($sidebar_trigger);
 
     var $sidebar = $("<div id='fx-sidebar'></div>");
     $sidebar.css("display", "none");
 
-    var $username = $("<h1>username</h1><br><hr>");
+    var $username = $("<h1>" + username + "</h1><br><hr>");
     $username.appendTo($sidebar);
 
     var $links = $("<div>" +
@@ -30,18 +42,14 @@ $(function () {
         "</div>");
     $links.appendTo($sidebar);
 
-    //var $quickSetting =$("<div></div>" +
-    //    "");
-
-
-    var $main = $("<div>" +
+    var $buttons = $("<div>" +
         "<ul>" +
         "<li><button class='button orange button-inline'>好</button>&nbsp;&nbsp;<button class='button orange button-inline'>不好</button></li>" +
         "<Li><button class='button orange button-block'>随意</button></Li>" +
         "<li><button class='button orange button-block'>分享</button></li>" +
         "</ul>" +
         "</div>");
-    $main.appendTo($sidebar);
+    $buttons.appendTo($sidebar);
 
     var $helpLink = $("<a target='_blank' href='" + chrome.extension.getURL('help.html') + "'>" +
         "<img src='" + chrome.extension.getURL('images/questionmark-24.png') + "'>" +
@@ -62,4 +70,5 @@ $(function () {
     //置换到这里
 
     $("body").children().first().before($sidebar);
-});
+    triggerHandler ();
+}

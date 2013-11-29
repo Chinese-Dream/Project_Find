@@ -5,8 +5,8 @@ $(function(){
     var records = JSON.parse("[" + localStorage.getItem("records") + "]");
     for(var i=0;i<records.length;i++){
         var tr= "<tr>" +
-            "<td>"+ records[i].url +"</td>" +
-            "<td>"+ records[i].title +"</td>" +
+            "<td>"+ records[i].url.slice(0,50) +"</td>" +
+            "<td>"+ records[i].title.slice(0,50) +"</td>" +
             "<td>"+ records[i].browserVer +"</td>" +
             "<td>"+ records[i].startTime +"</td>" +
             "<td>"+ records[i].finishTime +"</td>" +
