@@ -8,7 +8,7 @@
  */
 function isInSysFilterList(url) {
     if (url.indexOf("chrome-extension://") >= 0 || url.indexOf("chrome://") >= 0 || url.indexOf("file://") >= 0
-        || url.indexOf("chrome-devtools://") >= 0 || url.indexOf("chrome-search://") >= 0) {
+        || url.indexOf("chrome-devtools://") >= 0 || url.indexOf("chrome-search://") >= 0 || url.indexOf("about:blank") >= 0) {
         return true;
     }
     return false;
