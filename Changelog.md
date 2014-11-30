@@ -2,15 +2,18 @@ Version 0.59---赵小天
 bug修复；
 新增内容脚本和扩展其余部分的通讯。
 
+---
 Version 0.58---赵小天
 新增sync.js，用于打包记录数据并回传；
 代码优化和调整。
 
+---
 Version 0.57---赵小天
 新增timeInterval对象构造函数；
 以数组对象为基础，包装Records对象和TimeIntervals对象；
 代码优化和调整。
 
+---
 Version 0.55---赵小天
 background.js拆分；
 删除activeStartTime，activeFinishTime全局变量，删除record.activeTime属性，新增record.activeTimeInterval属性，相应代码调整；
@@ -19,68 +22,83 @@ background.js拆分；
 record.website属性修改为record.hostname，获取方法亦做修改；
 新增isLastActiveRecordExist和isLastActiveTimeIntervalDone方法。
 
+---
 Version 0.50---赵小天
 结构优化。
 
+---
 Version 0.49---赵小天
 初期优化options.html和options.js代码完毕；
 调整sidebar布局并优化代码；
 增加quickSetting，设计暂不完善，目前与sidebar共存；
 优化部分其余页面代码。
 
+---
 Version 0.48---赵小天
 将toolbar设计调整为自动隐藏式边栏；
 优化options.html和options.js代码；
 优化popup.html代码。
 
+---
 Version 0.47---赵小天
 优化options.js代码，提高代码重用性；
 加入bootstrap-switch，优化option.html开关按钮。
 
+---
 Version 0.46---赵小天
 优化内容脚本插入的速度问题；
 解决了两个离线试用跳转的问题；
 修正部分细节。
 
+---
 Version 0.45---赵小天
 localStorage新增isRecord，bakground.js代码暂未跟随调整；
 针对initial分为3种情况，优化相应代码；
 对browserAction的点击事件进行初步响应；
 新增content_script.js,toolbar_style.css。
 
+---
 Version 0.44---何伟
 将help.html,about.html,popup.html页面做了修改，用boostrap修改了他们的样式。
 
+---
 Version 0.43---何伟
 将installed.html页面做了修改，增加了登陆框，并修改了一些样式。
 
+---
 Version 0.42---赵小天
 将所有html页面按html5标准微调；
 新增initial.js,login.js,installed.html,installed_style.css文件；
 设置标志位用于标志是否初始化，以后同时还用于区别用户是离线使用还是登录使用；
 优化了部分代码，逻辑微调。
 
+---
 Version 0.41---何伟
 更新了background.js,getBrowserVer()在文件载入的时候执行一次，其他时候不执行；
 更新了analysis.js，添加了analyseData()方法，用以初期分析数据。
 
+---
 Version 0.36---赵小天
 更新了options.js,options.html,options.html和background.js文件；
 修改了部分html界面以动态添加删除过滤列表过滤项，将过滤列表以json形式存入localstorage。
 
+---
 Version 0.35---何伟
 新建了analysis.js文件，用于读取分析和处理数据；
 添加了readData()方法用于读取数据。
 
+---
 Version 0.34---何伟
 更新了background.js文件：
 更新了getWebsite()方法，解决了部分网站不能正确获取的问题。
 
+---
 Version 0.33---何伟
 更新了background.js文件：
 实现了有关存储数据的代码
 更新了isInUserFilterList(url)方法.
 
+---
 Version 0.32－－－赵小天
 更新了background.js文件；
 测试并优化了前台时间相关的代码；
@@ -88,25 +106,30 @@ Version 0.32－－－赵小天
 出现问题描述：前台c刷新至空页：c纪录项语言，浏览器版本，网站均为undefined，结束时间误差5秒；最后一个网页关闭后，浏览器退出，onActivated并没有触发，导致最后一个网页的最后一次前台时间没有被纪录。
 除上述问题外，其他运行良好。
 
+---
 Version 0.31－－－赵小天
 更新了background.js文件；
 在逻辑上基本解决了前台时间的问题，目前暂未测试；
 下一版本将考虑测试并完善修复代码。
 
+---
 Version 0.30－－－赵小天
 更新了background.js文件；
 初步完善了chrome.tabs.onActived事件监听；
 解决了activeTab切换时，前台Record计时器的暂停与激活。
 
+---
 Version 0.29－－－何伟
 更新了background.js文件；
 实现了isInUserFilterList(url)方法。
 
+---
 Version 0.28－－－何伟
 更新了background.js文件；
 实现了getWebsite()方法；
 添加并实现了getBrowserVer()方法用来捕获浏览器类型及版本。
 
+---
 Version 0.25－－－赵小天
 更新了background.js文件；
 新增了chrome.tabs.onRemoved和chrome.tabs.onUpdated事件监听；
